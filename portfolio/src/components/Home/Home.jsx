@@ -1,11 +1,7 @@
-import React from 'react'
+import Spline from '@splinetool/react-spline';
 
-const Home = () => {
+export default function App() {
   return (
-    <div>
-      
-    </div>
-  )
+    <Spline scene="https://prod.spline.design/Ho3js5CK32rPM8Wj/scene.splinecode" />
+  );
 }
-
-export default Home
