@@ -84,6 +84,29 @@
   background: rgba(0, 0, 0, 0.05); /* Light mode adjust */
 }
 
+/* Dark mode adjust for hover and active state */
+:root[class~="dark"] .nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  background: rgba(150, 150, 150, 0.15); /* Grey pill background */
+  position: relative;
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: var(--accent-pink);
+  box-shadow: 0 4px 15px 4px var(--accent-pink);
+  border-radius: 4px;
+}
+
 /* Actions */
 .navbar-actions {
   display: flex;

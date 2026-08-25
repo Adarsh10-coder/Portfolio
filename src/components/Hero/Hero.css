@@ -66,7 +66,7 @@
   width: clamp(160px, 20vw, 260px);
   aspect-ratio: 1 / 1.05;
   z-index: 5;
-  
+
   /* 3D Transform Properties */
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -196,7 +196,8 @@
 
 .meta-right {
   font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-  margin-bottom: 0.25rem; /* Optical baseline alignment */
+  margin-bottom: 0.25rem;
+  /* Optical baseline alignment */
 }
 
 @media (max-width: 768px) {

@@ -78,7 +78,7 @@ const Hero = () => {
 
   // Raw transforms tied directly to scroll
   // The scroll distance is roughly 1 viewport height (vh)
-  const rawY = useTransform(scrollY, [0, vh], [0, vh * 0.78]); 
+  const rawY = useTransform(scrollY, [0, vh], [0, vh * 0.78]);
   const rawRotateY = useTransform(scrollY, [0, vh], [0, 180]);
   const rawScale = useTransform(scrollY, [0, vh], [1, 2]);
 
@@ -87,57 +87,57 @@ const Hero = () => {
   const y = useSpring(rawY, springConfig);
   const rotateY = useSpring(rawRotateY, springConfig);
   const scale = useSpring(rawScale, springConfig);
-  
+
   // Spring the numeric offset for X translation
   const rawXOffset = useTransform(scrollY, [0, vh], [initialXOffset, finalXOffset]);
   const xOffset = useSpring(rawXOffset, springConfig);
   const x = useTransform(xOffset, (val) => `calc(-50% + ${val}px)`);
 
   return (
-    <section className="hero-section">
+    <section id="home" className="hero-section">
       <div className="hero-container">
-        
+
         {/* Central Content */}
         <div className="hero-main-content">
-          <DraggableShape 
+          <DraggableShape
             src="https://framerusercontent.com/images/OLDYsHB9RMavvQrkVRNy08ZXYE.png?scale-down-to=512&width=2550&height=2550"
             alt="3D Star"
             initialClass="shape-star"
           />
-          
-          <DraggableShape 
+
+          <DraggableShape
             src="https://framerusercontent.com/images/lIIjRX5gxRdY7UWw5wqIXicPOA.png?scale-down-to=512&width=2550&height=2550"
             alt="3D Lightning"
             initialClass="shape-lightning"
           />
-          
+
           <div className="hero-words">
             <div className="hero-word">FULL-STACK</div>
             <div className="hero-word">DEVELOPER</div>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             className="hero-photo-wrapper"
-            style={{ 
+            style={{
               x, // Use the dynamically calculated x position
-              y, 
-              rotateY, 
+              y,
+              rotateY,
               scale,
               // Z-index 5 puts it behind the text (which will be z-index 20)
-              zIndex: 5 
+              zIndex: 5
             }}
           >
             <div className="hero-photo-front">
-              <img 
-                src={greypic} 
-                alt="Aditya Grey" 
+              <img
+                src={greypic}
+                alt="Aditya Grey"
                 className="hero-profile-pic"
               />
             </div>
             <div className="hero-photo-back">
-              <img 
-                src={redpic} 
-                alt="Aditya Red" 
+              <img
+                src={redpic}
+                alt="Aditya Red"
                 className="hero-profile-pic"
               />
             </div>
@@ -147,9 +147,9 @@ const Hero = () => {
         {/* Bottom Metadata */}
         <div className="hero-metadata">
           <div className="meta-left">©2026</div>
-          <div className="meta-right">/CREATING SINCE 2020</div>
+          <div className="meta-right">/CREATING SINCE 2024</div>
         </div>
-        
+
       </div>
     </section>
   );
