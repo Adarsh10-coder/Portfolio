@@ -229,15 +229,16 @@ const MusicPlayer = ({ isOpen, onClose }) => {
               loop={false}
               initialSlide={activeIndex}
               coverflowEffect={{
-                rotate: 20,
-                stretch: 0,
-                depth: 150,
-                modifier: 1,
+                rotate: 40,
+                stretch: 10,
+                depth: 250,
+                modifier: 1.5,
                 slideShadows: true,
+                scale: 0.85,
               }}
               modules={[EffectCoverflow]}
               onSlideChange={handleSlideChange}
-              speed={600}
+              speed={800}
               className="mySwiper"
             >
               {playlist.map((track) => (
