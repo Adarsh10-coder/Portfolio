@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
+import Stats from './components/Stats/Stats';
 import { ReactLenis } from 'lenis/react';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Stats />
       </main>
     </ReactLenis>
   );
