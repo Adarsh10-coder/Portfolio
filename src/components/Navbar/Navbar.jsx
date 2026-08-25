@@ -15,7 +15,18 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
+  const [currentTime, setCurrentTime] = useState('');
   const lenis = useLenis();
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString('en-US', { hour12: false }));
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     // 1. Handle background blur when scrolling
@@ -125,13 +136,14 @@ const Navbar = () => {
             <kbd>⌘K</kbd>
           </button>
           
-          <button className="icon-btn rounded-btn" title="Toggle Theme">
-            <Sun size={18} />
+          <button className="icon-btn rounded-btn" title="Toggle Music">
+            <Music size={18} />
           </button>
           
-          <a href="#" className="icon-btn rounded-btn" title="External Link">
-            <ExternalLink size={18} />
-          </a>
+          <div className="time-pill" title="Current Local Time">
+            <span className="blinking-dot"></span>
+            <span>{currentTime}</span>
+          </div>
 
           <button 
             className="mobile-menu-btn" 

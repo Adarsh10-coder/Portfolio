@@ -1,4 +1,6 @@
 import './About.css';
+import LinkedInButton from './LinkedInButton';
+import ResumeButton from './ResumeButton';
 
 const About = () => {
   return (
@@ -9,17 +11,15 @@ const About = () => {
           <div className="about-text-content">
             <h2 className="title-large gradient-text">HELLO!</h2>
             <p className="about-description">
-              I am a passionate Full-Stack Developer dedicated to building beautiful, functional, and user-centric digital experiences. I believe in the power of modern web technologies to transform ideas into reality.
+              I am Adarsh Raj a passionate Full-Stack Developer dedicated to building beautiful, functional, and user-centric digital experiences. I believe in the power of modern web technologies to transform ideas into reality.
             </p>
             <p className="about-description">
               When I'm not coding, I'm exploring new design trends, contributing to open source, and continuously pushing the boundaries of what's possible on the web.
             </p>
             
-            <div className="about-skills">
-              <span className="skill-tag">React</span>
-              <span className="skill-tag">Node.js</span>
-              <span className="skill-tag">TypeScript</span>
-              <span className="skill-tag">UI/UX</span>
+            <div style={{ display: 'flex', gap: '3rem', marginTop: '1.5rem' }}>
+              <LinkedInButton />
+              <ResumeButton />
             </div>
           </div>
           
