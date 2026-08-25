@@ -1,0 +1,233 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  padding-top: var(--nav-height);
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  min-height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Central Content */
+.hero-main-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -2rem;
+  /* visually center better */
+}
+
+.hero-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+}
+
+.hero-word {
+  font-size: clamp(2.5rem, 10vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  position: relative;
+  z-index: 20;
+  /* Ensure text is above the photo */
+}
+
+.hero-word:first-child {
+  margin-bottom: 1.9rem;
+  /* Moves the first word up/creates space */
+}
+
+/* Photo overlapping the text */
+.hero-photo-wrapper {
+  position: absolute;
+  bottom: -70%;
+  /* Moved even further down */
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(160px, 20vw, 260px);
+  aspect-ratio: 1 / 1.05;
+  /* More square-like */
+  z-index: 5;
+  /* Sits behind the text */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hero-profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Simulating the red lighting from the reference photo if needed, 
+     or just let the image itself be the color. */
+  background-color: #d82323;
+  mix-blend-mode: normal;
+}
+
+/* Draggable Shapes */
+.abstract-shape {
+  position: absolute;
+  width: clamp(100px, 15vw, 220px);
+  user-select: none;
+  touch-action: none;
+  /* Prevents scrolling while dragging on mobile */
+  transition: transform 0.1s linear, filter 0.3s ease;
+  will-change: transform;
+}
+
+.shape-tooltip {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(17, 17, 17, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.shape-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: rgba(17, 17, 17, 0.85) transparent transparent transparent;
+}
+
+.abstract-shape:hover .shape-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.abstract-shape img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  /* Let the container handle mouse events */
+}
+
+.shape-star {
+  top: -46%;
+  left: -18%;
+}
+
+.shape-lightning {
+  bottom: -46%;
+  right: -16%;
+}
+
+.dragging {
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25)) scale(1.05);
+}
+
+/* Metadata Footer */
+.hero-metadata {
+  position: absolute;
+  bottom: -2rem;
+  left: 0;
+  right: 0;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  font-weight: 600;
+  color: var(--text-primary);
+  z-index: 20;
+}
+
+.meta-left {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.meta-right {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  margin-bottom: 0.25rem; /* Optical baseline alignment */
+}
+
+@media (max-width: 768px) {
+  .hero-word {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+  }
+
+  .hero-photo-wrapper {
+    bottom: -35%;
+    width: 150px;
+  }
+
+  .shape-star {
+    top: -20%;
+    left: -15%;
+    width: 80px;
+  }
+
+  .shape-lightning {
+    bottom: -20%;
+    right: -15%;
+    width: 80px;
+  }
+
+  .hero-metadata {
+    padding: 0 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    bottom: 1rem;
+  }
+}
+
+/* Float animation for non-dragging state */
+.animate-float {
+  animation: float-3d 6s ease-in-out infinite;
+}
+
+@keyframes float-3d {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(4deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
