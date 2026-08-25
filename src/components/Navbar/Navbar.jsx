@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Moon, Sun, Search, Music, ExternalLink, Menu, X } from 'lucide-react';
 import { useLenis } from 'lenis/react';
 import './Navbar.css';
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -16,6 +17,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
   const [currentTime, setCurrentTime] = useState('');
+  const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -136,7 +138,7 @@ const Navbar = () => {
             <kbd>⌘K</kbd>
           </button>
           
-          <button className="icon-btn rounded-btn" title="Toggle Music">
+          <button className="icon-btn rounded-btn" title="Toggle Music" onClick={() => setIsMusicPlayerOpen(!isMusicPlayerOpen)}>
             <Music size={18} />
           </button>
           
@@ -169,6 +171,8 @@ const Navbar = () => {
           ))}
         </div>
       )}
+      {/* Music Player Popup */}
+      <MusicPlayer isOpen={isMusicPlayerOpen} onClose={() => setIsMusicPlayerOpen(false)} />
     </nav>
   );
 };
