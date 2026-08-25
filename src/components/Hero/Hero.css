@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bg-primary);
-  overflow: hidden;
+  /* overflow: hidden; Removed to allow image to animate outside bounds */
   padding-top: var(--nav-height);
 }
 
@@ -57,29 +57,46 @@
   /* Moves the first word up/creates space */
 }
 
-/* Photo overlapping the text */
+/* Photo overlapping the text (now a 3D flip container) */
 .hero-photo-wrapper {
   position: absolute;
   bottom: -70%;
-  /* Moved even further down */
   left: 50%;
   transform: translateX(-50%);
   width: clamp(160px, 20vw, 260px);
   aspect-ratio: 1 / 1.05;
-  /* More square-like */
   z-index: 5;
-  /* Sits behind the text */
+  
+  /* 3D Transform Properties */
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.hero-photo-front,
+.hero-photo-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hero-photo-front {
+  transform: rotateY(0deg);
+}
+
+.hero-photo-back {
+  transform: rotateY(180deg);
 }
 
 .hero-profile-pic {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Simulating the red lighting from the reference photo if needed, 
-     or just let the image itself be the color. */
   background-color: #d82323;
   mix-blend-mode: normal;
 }
