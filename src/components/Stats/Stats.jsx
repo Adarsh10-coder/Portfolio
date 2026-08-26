@@ -25,12 +25,12 @@ const Stats = () => {
       const storedViews = parseInt(localStorage.getItem('portfolio_views') || '0');
       const newViews = storedViews + 1;
       localStorage.setItem('portfolio_views', newViews.toString());
-      currentViews = 20 + newViews;
+      currentViews = 55 + newViews;
       setViews(currentViews);
       viewIncremented.current = true;
     } else {
       const storedViews = parseInt(localStorage.getItem('portfolio_views') || '0');
-      currentViews = 20 + storedViews;
+      currentViews = 55 + storedViews;
       setViews(currentViews);
     }
 
