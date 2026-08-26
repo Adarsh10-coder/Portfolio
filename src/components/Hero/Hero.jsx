@@ -4,52 +4,28 @@ import greypic from '../../assets/greypic.png';
 import redpic from '../../assets/redpic.png';
 import './Hero.css';
 
-// Draggable Shape Component
 const DraggableShape = ({ src, alt, initialClass }) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-      setPosition((prev) => ({
-        x: prev.x + e.movementX,
-        y: prev.y + e.movementY,
-      }));
-    };
-
-    const handleMouseUp = () => {
-      if (isDragging) {
-        setIsDragging(false);
-      }
-    };
-
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging]);
-
   return (
-    <div
+    <motion.div
+      drag
+      dragConstraints={{ left: -300, right: 300, top: -300, bottom: 300 }}
+      dragElastic={0.2}
+      dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
+      initial={{ scale: 0, opacity: 0, rotate: -30 }}
+      animate={{ scale: 1, opacity: 1, rotate: 0 }}
+      transition={{ type: 'spring', stiffness: 60, damping: 15, delay: 0.6 }}
       className={`abstract-shape ${initialClass}`}
       style={{
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        cursor: isDragging ? 'grabbing' : 'grab',
-        zIndex: isDragging ? 50 : 30,
+        cursor: 'grab',
+        zIndex: 30,
       }}
-      onMouseDown={() => setIsDragging(true)}
-      onDoubleClick={() => setIsDragging(true)}
+      whileDrag={{ cursor: 'grabbing', zIndex: 50, scale: 1.1 }}
     >
-      {!isDragging && <div className="shape-tooltip">Double click to move me</div>}
-      <div className={!isDragging ? 'animate-float' : ''}>
+      <div className="shape-tooltip">Drag me</div>
+      <div className="animate-float">
         <img src={src} alt={alt} draggable="false" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -71,9 +47,7 @@ const Hero = () => {
 
   const { vh, vw } = dimensions;
 
-  // Calculate offsets to position the image further right as requested
-  const initialXOffset = 120; // Starts 120px to the right of center
-  // 0.25 was center of right column. 0.35 pushes it closer to the right edge.
+  const initialXOffset = 120;
   const finalXOffset = Math.min(vw, 1200) * 0.35;
 
   // Raw transforms tied directly to scroll
@@ -111,10 +85,45 @@ const Hero = () => {
             initialClass="shape-lightning"
           />
 
-          <div className="hero-words">
-            <div className="hero-word">FULL-STACK</div>
-            <div className="hero-word">DEVELOPER</div>
-          </div>
+          <motion.div 
+            className="hero-words"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { 
+                opacity: 1, 
+                transition: { staggerChildren: 0.2, delayChildren: 0.2 } 
+              }
+            }}
+          >
+            <motion.div 
+              className="hero-word"
+              variants={{
+                hidden: { opacity: 0, y: 100 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  transition: { type: "spring", stiffness: 40, damping: 15 } 
+                }
+              }}
+            >
+              FULL-STACK
+            </motion.div>
+            <motion.div 
+              className="hero-word"
+              variants={{
+                hidden: { opacity: 0, y: 100 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  transition: { type: "spring", stiffness: 40, damping: 15 } 
+                }
+              }}
+            >
+              DEVELOPER
+            </motion.div>
+          </motion.div>
 
           <motion.div
             className="hero-photo-wrapper"
@@ -145,10 +154,15 @@ const Hero = () => {
         </div>
 
         {/* Bottom Metadata */}
-        <div className="hero-metadata">
+        <motion.div 
+          className="hero-metadata"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
           <div className="meta-left">©2026</div>
           <div className="meta-right">/CREATING SINCE 2024</div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import './Contact.css';
 
 const Contact = () => {
@@ -53,7 +54,14 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="contact-section">
+    <motion.section 
+      id="contact" 
+      className="contact-section"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <div className="contact-container">
         {/* Left Side: Visual / Info */}
         <div className="contact-left">
@@ -180,7 +188,7 @@ const Contact = () => {
         </div>
       )}
 
-    </section>
+    </motion.section>
   );
 };
 

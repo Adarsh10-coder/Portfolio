@@ -1,10 +1,18 @@
+import { motion } from 'framer-motion';
 import './About.css';
 import LinkedInButton from './LinkedInButton';
 import ResumeButton from './ResumeButton';
 
 const About = () => {
   return (
-    <section className="about-section" id="about">
+    <motion.section 
+      className="about-section" 
+      id="about"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <div className="about-container">
         
         <div className="about-grid">
@@ -29,7 +37,7 @@ const About = () => {
         </div>
         
       </div>
-    </section>
+    </motion.section>
   );
 };
 

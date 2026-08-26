@@ -20,7 +20,7 @@ const Stats = () => {
 
   useEffect(() => {
     // Views Logic
-    let currentViews = 20;
+    let currentViews = 55;
     if (!viewIncremented.current) {
       const storedViews = parseInt(localStorage.getItem('portfolio_views') || '0');
       const newViews = storedViews + 1;
@@ -36,7 +36,7 @@ const Stats = () => {
 
     // Appreciation Logic
     const storedAppreciations = parseInt(localStorage.getItem('portfolio_appreciations') || '0');
-    setAppreciationCount(30 + storedAppreciations);
+    setAppreciationCount(32 + storedAppreciations);
 
     if (sessionStorage.getItem('has_appreciated') === 'true') {
       setHasAppreciated(true);
@@ -121,7 +121,14 @@ const Stats = () => {
 
 
   return (
-    <section id="stats" className="stats-section">
+    <motion.section 
+      id="stats" 
+      className="stats-section"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <div className="stats-container">
 
         {/* Section 1: Portfolio Stats */}
@@ -286,7 +293,7 @@ const Stats = () => {
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 };
 
